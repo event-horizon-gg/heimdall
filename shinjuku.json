@@ -1,0 +1,8 @@
+{
+  "name": "Heimdall",
+  "pitch": "Decide where to start making room on your Mac.",
+  "description": "A menu bar disk monitor. Open its panel for concrete recommendations: easy cleanup first, with worthwhile larger moves alongside it, and a warning when free space runs low.",
+  "accentColor": "#4F7CFF",
+  "icon": "build/Heimdall.app/Contents/Resources/Heimdall.icns",
+  "screenshots": []
+}
