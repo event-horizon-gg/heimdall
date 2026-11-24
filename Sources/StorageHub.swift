@@ -103,7 +103,13 @@ struct StorageHub: View {
                 navigation("Moves","arrow.left.arrow.right","moves")
                 Spacer()
                 navigation("Preferences","slider.horizontal.3","preferences")
-            }.padding(18).frame(width: 218).background(Color.primary.opacity(0.025))
+            }.padding(18).frame(width: 218)
+                .background(alignment: .bottomLeading) {
+                    // The Event Horizon mark fills the sidebar's empty stretch, clear of the navigation labels.
+                    EventHorizonMark().frame(width: 190,height: 190).offset(x: -46,y: -64)
+                }
+                .clipped()
+                .background(Color.primary.opacity(0.025))
             Divider()
             VStack(alignment: .leading,spacing: 0) {
                 HStack {

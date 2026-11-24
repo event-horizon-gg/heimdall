@@ -12,7 +12,7 @@ case "$ARCH" in
   *) echo "Unsupported architecture: $ARCH" >&2; exit 1 ;;
 esac
 for TARGET_ARCH in "${ARCHS[@]}"; do
-  xcrun swiftc -O -target "$TARGET_ARCH-apple-macosx13.0" -framework AppKit -framework UserNotifications "$ROOT/Sources/Features.swift" "$ROOT/Sources/Cleanup.swift" "$ROOT/Sources/Opportunities.swift" "$ROOT/Sources/Recommendations.swift" "$ROOT/Sources/Panel.swift" "$ROOT/Sources/CleanupPanel.swift" "$ROOT/Sources/StorageHub.swift" "$ROOT/Sources/main.swift" -o "$BUILD_WORKDIR/Heimdall-$TARGET_ARCH"
+  xcrun swiftc -O -target "$TARGET_ARCH-apple-macosx13.0" -framework AppKit -framework UserNotifications "$ROOT/Sources/Features.swift" "$ROOT/Sources/Watermark.swift" "$ROOT/Sources/Cleanup.swift" "$ROOT/Sources/Opportunities.swift" "$ROOT/Sources/Recommendations.swift" "$ROOT/Sources/Panel.swift" "$ROOT/Sources/CleanupPanel.swift" "$ROOT/Sources/StorageHub.swift" "$ROOT/Sources/main.swift" -o "$BUILD_WORKDIR/Heimdall-$TARGET_ARCH"
 done
 if [ "$ARCH" = universal ]; then
   xcrun lipo -create "$BUILD_WORKDIR/Heimdall-arm64" "$BUILD_WORKDIR/Heimdall-x86_64" -output "$APP/Contents/MacOS/Heimdall"
@@ -28,6 +28,7 @@ for SIZE in 16 32 128 256 512; do
   sips -z "$DOUBLE" "$DOUBLE" "$BUILD_WORKDIR/assets/app-icon.png" --out "$ICONSET/icon_${SIZE}x${SIZE}@2x.png" >/dev/null
 done
 iconutil -c icns "$ICONSET" -o "$APP/Contents/Resources/Heimdall.icns"
+cp "$ROOT/packaging/brand/event-horizon-watermark.png" "$APP/Contents/Resources/"
 python3 - "$APP" <<'PY'
 import os,pathlib,plistlib,sys
 p=pathlib.Path(sys.argv[1])/'Contents/Info.plist'
